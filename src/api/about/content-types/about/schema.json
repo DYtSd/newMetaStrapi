@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "abouts",
+  "info": {
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "About",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "TopBackgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "AboutTitle": {
+      "type": "string"
+    },
+    "AboutContent1": {
+      "type": "text"
+    },
+    "AboutImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "DonateDescription": {
+      "type": "string"
+    },
+    "VolunteerDescription": {
+      "type": "string"
+    },
+    "DonateURL": {
+      "type": "string"
+    },
+    "LatestDonateDescription": {
+      "type": "string"
+    },
+    "sponsor_details": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sponsor-detail.sponsor-detail"
+    },
+    "AboutContent2": {
+      "type": "text"
+    }
+  }
+}
