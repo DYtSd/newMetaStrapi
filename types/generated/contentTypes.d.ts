@@ -959,21 +959,119 @@ export interface ApiAboutAbout extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    TopBackgroundImage: Attribute.Media & Attribute.Required;
-    AboutTitle: Attribute.String;
-    AboutContent1: Attribute.Text;
-    AboutImage: Attribute.Media;
-    DonateDescription: Attribute.String;
-    VolunteerDescription: Attribute.String;
-    DonateURL: Attribute.String;
-    LatestDonateDescription: Attribute.String;
-    sponsor_details: Attribute.Relation<
+    TopBackgroundImage: Attribute.Media &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    AboutTitle: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    AboutContent1: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    AboutImage: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    DonateDescription: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    VolunteerDescription: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    DonateURL: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    LatestDonateDescription: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    sponsor_lists: Attribute.Relation<
       'api::about.about',
       'oneToMany',
-      'api::sponsor-detail.sponsor-detail'
+      'api::sponsor-list.sponsor-list'
     >;
-    AboutContent2: Attribute.Text;
+    AboutContent2: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    serveTitle: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    serveDescripe: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    DonateTitle: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    DonateButtonName: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    VolunteerTitle: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    VolunteerButtonName: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    LatestDonationTitle: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    nav_menu: Attribute.Relation<
+      'api::about.about',
+      'oneToOne',
+      'api::nav-menu.nav-menu'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -989,6 +1087,70 @@ export interface ApiAboutAbout extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::about.about',
+      'oneToMany',
+      'api::about.about'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiApplyVolunteerApplyVolunteer extends Schema.CollectionType {
+  collectionName: 'apply_volunteers';
+  info: {
+    singularName: 'apply-volunteer';
+    pluralName: 'apply-volunteers';
+    displayName: 'applyVolunteer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    volunteerName: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    volunteerEmail: Attribute.Email &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    volunteerMessage: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::apply-volunteer.apply-volunteer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::apply-volunteer.apply-volunteer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::apply-volunteer.apply-volunteer',
+      'oneToMany',
+      'api::apply-volunteer.apply-volunteer'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -998,16 +1160,47 @@ export interface ApiBlogBlog extends Schema.CollectionType {
     singularName: 'blog';
     pluralName: 'blogs';
     displayName: 'blog';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    blogImage: Attribute.Media;
-    blogDate: Attribute.Date;
-    blogRight: Attribute.String;
-    blogTitle: Attribute.String;
-    blogContent: Attribute.Text;
+    blogImage: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    blogDate: Attribute.Date &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    blogRight: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    blogTitle: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    blogContent: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1015,75 +1208,727 @@ export interface ApiBlogBlog extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::blog.blog', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-  };
-}
-
-export interface ApiBlogContentBlogContent extends Schema.CollectionType {
-  collectionName: 'blog_contents';
-  info: {
-    singularName: 'blog-content';
-    pluralName: 'blog-contents';
-    displayName: 'blogContent';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    blogImage: Attribute.Media;
-    blogTitle: Attribute.String;
-    blogContent: Attribute.Text;
-    blogDate: Attribute.Date;
-    blogRight: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::blog-content.blog-content',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::blog-content.blog-content',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBlogPartBlogPart extends Schema.CollectionType {
-  collectionName: 'blog_parts';
-  info: {
-    singularName: 'blog-part';
-    pluralName: 'blog-parts';
-    displayName: 'blogPart';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    blogs: Attribute.Relation<
-      'api::blog-part.blog-part',
+    localizations: Attribute.Relation<
+      'api::blog.blog',
       'oneToMany',
       'api::blog.blog'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiBlogPageBlogPage extends Schema.CollectionType {
+  collectionName: 'blog_pages';
+  info: {
+    singularName: 'blog-page';
+    pluralName: 'blog-pages';
+    displayName: 'BlogPage';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    topBackground: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    nav_menu: Attribute.Relation<
+      'api::blog-page.blog-page',
+      'oneToOne',
+      'api::nav-menu.nav-menu'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::blog-part.blog-part',
+      'api::blog-page.blog-page',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::blog-part.blog-part',
+      'api::blog-page.blog-page',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::blog-page.blog-page',
+      'oneToMany',
+      'api::blog-page.blog-page'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiCasuseEventCasuseEvent extends Schema.CollectionType {
+  collectionName: 'casuse_events';
+  info: {
+    singularName: 'casuse-event';
+    pluralName: 'casuse-events';
+    displayName: 'CasuseEvent';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    causeImage: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    causeTitle: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    causeContent: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    lastDonationTime: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    donateAmout: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    causeUrl: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::casuse-event.casuse-event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::casuse-event.casuse-event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::casuse-event.casuse-event',
+      'oneToMany',
+      'api::casuse-event.casuse-event'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiCausesViewCausesView extends Schema.CollectionType {
+  collectionName: 'causes_views';
+  info: {
+    singularName: 'causes-view';
+    pluralName: 'causes-views';
+    displayName: 'CausesView';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    TopBackgroundImage: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    nav_menu: Attribute.Relation<
+      'api::causes-view.causes-view',
+      'oneToOne',
+      'api::nav-menu.nav-menu'
+    >;
+    volunteer_apply_box: Attribute.Relation<
+      'api::causes-view.causes-view',
+      'oneToOne',
+      'api::volunteer-apply-box.volunteer-apply-box'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::causes-view.causes-view',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::causes-view.causes-view',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::causes-view.causes-view',
+      'oneToMany',
+      'api::causes-view.causes-view'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiContactContact extends Schema.CollectionType {
+  collectionName: 'contacts';
+  info: {
+    singularName: 'contact';
+    pluralName: 'contacts';
+    displayName: 'Contact';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    contactInformation: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    address: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    phone: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Email: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Website: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    websiteURL: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    contactTitle: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    yourName: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    yourEmail: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    subject: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    message: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    sendMessage: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    nav_menu: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'api::nav-menu.nav-menu'
+    >;
+    TopBackgroundImage: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::contact.contact',
+      'oneToMany',
+      'api::contact.contact'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiDonateViewDonateView extends Schema.CollectionType {
+  collectionName: 'donate_views';
+  info: {
+    singularName: 'donate-view';
+    pluralName: 'donate-views';
+    displayName: 'DonateView';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    TopBackgroundImage: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    nav_menu: Attribute.Relation<
+      'api::donate-view.donate-view',
+      'oneToOne',
+      'api::nav-menu.nav-menu'
+    >;
+    volunteer_apply_box: Attribute.Relation<
+      'api::donate-view.donate-view',
+      'oneToOne',
+      'api::volunteer-apply-box.volunteer-apply-box'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::donate-view.donate-view',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::donate-view.donate-view',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::donate-view.donate-view',
+      'oneToMany',
+      'api::donate-view.donate-view'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiEventEvent extends Schema.CollectionType {
+  collectionName: 'events';
+  info: {
+    singularName: 'event';
+    pluralName: 'events';
+    displayName: 'Event';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    TopBackgroundImage: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    nav_menu: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'api::nav-menu.nav-menu'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::event.event',
+      'oneToMany',
+      'api::event.event'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiEventBlogEventBlog extends Schema.CollectionType {
+  collectionName: 'event_blogs';
+  info: {
+    singularName: 'event-blog';
+    pluralName: 'event-blogs';
+    displayName: 'EventBlog';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    eventImage: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    eventTitle: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    eventContent: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    eventDate: Attribute.Date &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    eventRight: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    eventDuration: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    eventVenue: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    eventUrl: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    JointEvent: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event-blog.event-blog',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event-blog.event-blog',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::event-blog.event-blog',
+      'oneToMany',
+      'api::event-blog.event-blog'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiGalleryGallery extends Schema.CollectionType {
+  collectionName: 'galleries';
+  info: {
+    singularName: 'gallery';
+    pluralName: 'galleries';
+    displayName: 'Gallery';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    photos: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    nav_menu: Attribute.Relation<
+      'api::gallery.gallery',
+      'oneToOne',
+      'api::nav-menu.nav-menu'
+    >;
+    TopBackgroundImage: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    volunteer_apply_box: Attribute.Relation<
+      'api::gallery.gallery',
+      'oneToOne',
+      'api::volunteer-apply-box.volunteer-apply-box'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::gallery.gallery',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::gallery.gallery',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::gallery.gallery',
+      'oneToMany',
+      'api::gallery.gallery'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiNavMenuNavMenu extends Schema.CollectionType {
+  collectionName: 'nav_menus';
+  info: {
+    singularName: 'nav-menu';
+    pluralName: 'nav-menus';
+    displayName: 'navMenu';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    brand: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Home: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    About: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Causes: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Donate: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Blog: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Gallery: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Event: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Contact: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    AboutUSTitle: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    AboutUSContent: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    RecentBlog: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    SiteLink: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    question: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    address: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    phone: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    consultEamil: Attribute.Email &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::nav-menu.nav-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::nav-menu.nav-menu',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::nav-menu.nav-menu',
+      'oneToMany',
+      'api::nav-menu.nav-menu'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -1115,6 +1960,71 @@ export interface ApiOrderOrder extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+  };
+}
+
+export interface ApiQuestionViewCollectBoxQuestionViewCollectBox
+  extends Schema.CollectionType {
+  collectionName: 'question_view_collect_boxes';
+  info: {
+    singularName: 'question-view-collect-box';
+    pluralName: 'question-view-collect-boxes';
+    displayName: 'questionViewCollectBox';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    userName: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    userEmail: Attribute.Email &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    questionSubject: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    questionMessage: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::question-view-collect-box.question-view-collect-box',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::question-view-collect-box.question-view-collect-box',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::question-view-collect-box.question-view-collect-box',
+      'oneToMany',
+      'api::question-view-collect-box.question-view-collect-box'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -1155,6 +2065,166 @@ export interface ApiSponsorDetailSponsorDetail extends Schema.CollectionType {
   };
 }
 
+export interface ApiSponsorListSponsorList extends Schema.CollectionType {
+  collectionName: 'sponsor_lists';
+  info: {
+    singularName: 'sponsor-list';
+    pluralName: 'sponsor-lists';
+    displayName: 'sponsorList';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    SponsorIcon: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    sponsorName: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    sponsorNameURL: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    DonateAmount: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    DonatePurpose: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    DonatePurposeUrl: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    DonateDate: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sponsor-list.sponsor-list',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sponsor-list.sponsor-list',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::sponsor-list.sponsor-list',
+      'oneToMany',
+      'api::sponsor-list.sponsor-list'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiVolunteerApplyBoxVolunteerApplyBox
+  extends Schema.CollectionType {
+  collectionName: 'volunteer_apply_boxes';
+  info: {
+    singularName: 'volunteer-apply-box';
+    pluralName: 'volunteer-apply-boxes';
+    displayName: 'volunteerApplyBox';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    beVolunteer: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    yourName: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    yourEmail: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    message: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    sendMessage: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    background: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::volunteer-apply-box.volunteer-apply-box',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::volunteer-apply-box.volunteer-apply-box',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::volunteer-apply-box.volunteer-apply-box',
+      'oneToMany',
+      'api::volunteer-apply-box.volunteer-apply-box'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1176,11 +2246,22 @@ declare module '@strapi/types' {
       'plugin::strapi-stripe.ss-product': PluginStrapiStripeSsProduct;
       'plugin::strapi-stripe.ss-payment': PluginStrapiStripeSsPayment;
       'api::about.about': ApiAboutAbout;
+      'api::apply-volunteer.apply-volunteer': ApiApplyVolunteerApplyVolunteer;
       'api::blog.blog': ApiBlogBlog;
-      'api::blog-content.blog-content': ApiBlogContentBlogContent;
-      'api::blog-part.blog-part': ApiBlogPartBlogPart;
+      'api::blog-page.blog-page': ApiBlogPageBlogPage;
+      'api::casuse-event.casuse-event': ApiCasuseEventCasuseEvent;
+      'api::causes-view.causes-view': ApiCausesViewCausesView;
+      'api::contact.contact': ApiContactContact;
+      'api::donate-view.donate-view': ApiDonateViewDonateView;
+      'api::event.event': ApiEventEvent;
+      'api::event-blog.event-blog': ApiEventBlogEventBlog;
+      'api::gallery.gallery': ApiGalleryGallery;
+      'api::nav-menu.nav-menu': ApiNavMenuNavMenu;
       'api::order.order': ApiOrderOrder;
+      'api::question-view-collect-box.question-view-collect-box': ApiQuestionViewCollectBoxQuestionViewCollectBox;
       'api::sponsor-detail.sponsor-detail': ApiSponsorDetailSponsorDetail;
+      'api::sponsor-list.sponsor-list': ApiSponsorListSponsorList;
+      'api::volunteer-apply-box.volunteer-apply-box': ApiVolunteerApplyBoxVolunteerApplyBox;
     }
   }
 }

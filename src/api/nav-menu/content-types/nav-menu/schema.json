@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "abouts",
+  "collectionName": "nav_menus",
   "info": {
-    "singularName": "about",
-    "pluralName": "abouts",
-    "displayName": "About",
+    "singularName": "nav-menu",
+    "pluralName": "nav-menus",
+    "displayName": "navMenu",
     "description": ""
   },
   "options": {
@@ -16,100 +16,7 @@
     }
   },
   "attributes": {
-    "TopBackgroundImage": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "AboutTitle": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "AboutContent1": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "AboutImage": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "DonateDescription": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "VolunteerDescription": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "DonateURL": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "LatestDonateDescription": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "sponsor_lists": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::sponsor-list.sponsor-list"
-    },
-    "AboutContent2": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "serveTitle": {
+    "brand": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -117,7 +24,7 @@
       },
       "type": "string"
     },
-    "serveDescripe": {
+    "Home": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -125,7 +32,7 @@
       },
       "type": "string"
     },
-    "DonateTitle": {
+    "About": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -133,7 +40,7 @@
       },
       "type": "string"
     },
-    "DonateButtonName": {
+    "Causes": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -141,7 +48,7 @@
       },
       "type": "string"
     },
-    "VolunteerTitle": {
+    "Donate": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -149,7 +56,7 @@
       },
       "type": "string"
     },
-    "VolunteerButtonName": {
+    "Blog": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -157,7 +64,7 @@
       },
       "type": "string"
     },
-    "LatestDonationTitle": {
+    "Gallery": {
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -165,10 +72,85 @@
       },
       "type": "string"
     },
-    "nav_menu": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::nav-menu.nav-menu"
+    "Event": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "Contact": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "AboutUSTitle": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "AboutUSContent": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "text"
+    },
+    "RecentBlog": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "SiteLink": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "question": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "address": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "phone": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "consultEamil": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "email"
     }
   }
 }

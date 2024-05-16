@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "blogs",
+  "collectionName": "sponsor_lists",
   "info": {
-    "singularName": "blog",
-    "pluralName": "blogs",
-    "displayName": "blog",
+    "singularName": "sponsor-list",
+    "pluralName": "sponsor-lists",
+    "displayName": "sponsorList",
     "description": ""
   },
   "options": {
@@ -16,7 +16,7 @@
     }
   },
   "attributes": {
-    "blogImage": {
+    "SponsorIcon": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -32,37 +32,53 @@
         }
       }
     },
-    "blogDate": {
-      "type": "date",
+    "sponsorName": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "type": "string"
     },
-    "blogRight": {
-      "type": "string",
+    "sponsorNameURL": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "type": "string"
     },
-    "blogTitle": {
-      "type": "string",
+    "DonateAmount": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "type": "string"
     },
-    "blogContent": {
-      "type": "text",
+    "DonatePurpose": {
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "type": "string"
+    },
+    "DonatePurposeUrl": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "DonateDate": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }
