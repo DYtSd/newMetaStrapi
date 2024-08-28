@@ -742,7 +742,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -771,6 +770,18 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    tel: Attribute.BigInteger & Attribute.Required;
+    status: Attribute.Enumeration<['children', 'teacher']> & Attribute.Required;
+    user_courses: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToMany',
+      'api::user-course.user-course'
+    >;
+    BMI: Attribute.Float;
+    birthday: Attribute.Date;
+    gender: Attribute.String;
+    height: Attribute.Integer;
+    weight: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1201,6 +1212,11 @@ export interface ApiBlogBlog extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    blog_pages: Attribute.Relation<
+      'api::blog.blog',
+      'manyToMany',
+      'api::blog-page.blog-page'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1243,6 +1259,11 @@ export interface ApiBlogPageBlogPage extends Schema.CollectionType {
       'api::blog-page.blog-page',
       'oneToOne',
       'api::nav-menu.nav-menu'
+    >;
+    blogs: Attribute.Relation<
+      'api::blog-page.blog-page',
+      'manyToMany',
+      'api::blog.blog'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1524,6 +1545,48 @@ export interface ApiContactContact extends Schema.CollectionType {
   };
 }
 
+export interface ApiCourseCourse extends Schema.CollectionType {
+  collectionName: 'courses';
+  info: {
+    singularName: 'course';
+    pluralName: 'courses';
+    displayName: 'course';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    courseImage: Attribute.Media;
+    couseTitle: Attribute.String & Attribute.Required & Attribute.Unique;
+    courseContent: Attribute.Text & Attribute.Required & Attribute.Unique;
+    courseDate: Attribute.Date;
+    courseDuration: Attribute.String;
+    courseVenue: Attribute.String;
+    user_courses: Attribute.Relation<
+      'api::course.course',
+      'manyToMany',
+      'api::user-course.user-course'
+    >;
+    courseOrganization: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiDonateViewDonateView extends Schema.CollectionType {
   collectionName: 'donate_views';
   info: {
@@ -1789,6 +1852,47 @@ export interface ApiGalleryGallery extends Schema.CollectionType {
   };
 }
 
+export interface ApiMetaUserMetaUser extends Schema.CollectionType {
+  collectionName: 'meta_users';
+  info: {
+    singularName: 'meta-user';
+    pluralName: 'meta-users';
+    displayName: 'MetaUser';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    userName: Attribute.String & Attribute.Required;
+    userEmail: Attribute.Email & Attribute.Required & Attribute.Unique;
+    tel: Attribute.BigInteger & Attribute.Required;
+    userPass: Attribute.Password & Attribute.Required;
+    t21: Attribute.Component<'asd.asd', true>;
+    test: Attribute.Enumeration<['food', 'player', 'user']>;
+    orders: Attribute.Relation<
+      'api::meta-user.meta-user',
+      'manyToMany',
+      'api::order.order'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::meta-user.meta-user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::meta-user.meta-user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiNavMenuNavMenu extends Schema.CollectionType {
   collectionName: 'nav_menus';
   info: {
@@ -1938,6 +2042,7 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     singularName: 'order';
     pluralName: 'orders';
     displayName: 'order';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1945,6 +2050,11 @@ export interface ApiOrderOrder extends Schema.CollectionType {
   attributes: {
     customEmail: Attribute.Email;
     stripeID: Attribute.Text;
+    meta_users: Attribute.Relation<
+      'api::order.order',
+      'manyToMany',
+      'api::meta-user.meta-user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -2148,6 +2258,50 @@ export interface ApiSponsorListSponsorList extends Schema.CollectionType {
   };
 }
 
+export interface ApiUserCourseUserCourse extends Schema.CollectionType {
+  collectionName: 'user_courses';
+  info: {
+    singularName: 'user-course';
+    pluralName: 'user-courses';
+    displayName: 'userCourse';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    userName: Attribute.String & Attribute.Required;
+    users_permissions_users: Attribute.Relation<
+      'api::user-course.user-course',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    couseName: Attribute.String;
+    courses: Attribute.Relation<
+      'api::user-course.user-course',
+      'manyToMany',
+      'api::course.course'
+    >;
+    survey: Attribute.JSON;
+    surveyTeacher: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-course.user-course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-course.user-course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiVolunteerApplyBoxVolunteerApplyBox
   extends Schema.CollectionType {
   collectionName: 'volunteer_apply_boxes';
@@ -2252,15 +2406,18 @@ declare module '@strapi/types' {
       'api::casuse-event.casuse-event': ApiCasuseEventCasuseEvent;
       'api::causes-view.causes-view': ApiCausesViewCausesView;
       'api::contact.contact': ApiContactContact;
+      'api::course.course': ApiCourseCourse;
       'api::donate-view.donate-view': ApiDonateViewDonateView;
       'api::event.event': ApiEventEvent;
       'api::event-blog.event-blog': ApiEventBlogEventBlog;
       'api::gallery.gallery': ApiGalleryGallery;
+      'api::meta-user.meta-user': ApiMetaUserMetaUser;
       'api::nav-menu.nav-menu': ApiNavMenuNavMenu;
       'api::order.order': ApiOrderOrder;
       'api::question-view-collect-box.question-view-collect-box': ApiQuestionViewCollectBoxQuestionViewCollectBox;
       'api::sponsor-detail.sponsor-detail': ApiSponsorDetailSponsorDetail;
       'api::sponsor-list.sponsor-list': ApiSponsorListSponsorList;
+      'api::user-course.user-course': ApiUserCourseUserCourse;
       'api::volunteer-apply-box.volunteer-apply-box': ApiVolunteerApplyBoxVolunteerApplyBox;
     }
   }
